@@ -8,18 +8,18 @@ const argv = require('minimist')(process.argv.slice(2));
 let userFromTerminal = argv.addUser;
 let messageFromTerminal = argv.message;
 
-function addingMessageInMsg(ms) {
-    msg.push(ms)
-}
-myEvent.on('message', addingMessageInMsg);
-myEvent.emit('message', messageFromTerminal)
-
 function addingUserInUser(us) {
-    user.push(us)
+    user.push(us);
 }
+function addingMessageInMsg(ms) {
+    msg.push(ms);
+}
+
 myEvent.on('user', addingUserInUser);
-myEvent.emit('user', userFromTerminal)
-console.log(user);
-console.log(msg);
-console.log(argv);
+myEvent.on('message', addingMessageInMsg);
+
+myEvent.emit('user', userFromTerminal);
+myEvent.emit('message', messageFromTerminal);
+
+
 // node response.js  --addUser "Marsel"  --message "Welcome"
