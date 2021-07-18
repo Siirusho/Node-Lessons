@@ -22,4 +22,4 @@ myEvent.emit('user', userFromTerminal);
 myEvent.emit('message', messageFromTerminal);
 
 
-// node response.js  --addUser "Marsel"  --message "Welcome"
+// node script.js  --addUser "Marsel"  --message "Welcome"
