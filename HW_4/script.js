@@ -2,8 +2,8 @@ const cluster = require('cluster');
 const process = require('process');
 
 const factorial = (num) => {
-    if(num==1 || num==0) return num
-    return num*factorial(num-1)
+    if( num == 1 || num == 0) return num;
+    return num * factorial( num - 1);
 }
 if (cluster.isMaster) {
     const worker = cluster.fork();
