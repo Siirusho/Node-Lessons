@@ -14,84 +14,68 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var setDoorCount = /** @class */ (function () {
-    function setDoorCount(doorCount) {
+var Car = /** @class */ (function () {
+    function Car() {
         var _this = this;
-        this.setDoorCount = function (count) {
-            if (count === void 0) { count = 2 || 4; }
-            return _this.doorCount = count;
+        this.priceCalculation = function () {
+            if (_this.door === 4) {
+                _this.price += 500;
+            }
+            else
+                _this.price -= 500;
+            if (_this.engine === 'oil') {
+                _this.price += 1000;
+            }
+            else
+                _this.price -= 1000;
+            if (_this.color != 'white') {
+                _this.price += 100;
+            }
         };
-        this.doorCount = doorCount;
+        this.getDescription = function () { return "Engine:" + _this.engine + ", Power:" + _this.power + ", Color:" + _this.color + ", " + _this.door + " doors costs " + _this.price + "}"; };
     }
-    return setDoorCount;
+    return Car;
 }());
-var setColor = /** @class */ (function (_super) {
-    __extends(setColor, _super);
-    function setColor(color, doorCount) {
-        if (color === void 0) { color = 'white'; }
-        var _this = _super.call(this, doorCount) || this;
-        _this.setColor = function (color) { return _this.color = color; };
+var BMW = /** @class */ (function (_super) {
+    __extends(BMW, _super);
+    function BMW() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.engine = "oil";
+        _this.power = 360;
+        _this.door = 4;
+        _this.color = 'red';
+        _this.price = 10000;
+        return _this;
+    }
+    return BMW;
+}(Car));
+var setDoorColor = /** @class */ (function (_super) {
+    __extends(setDoorColor, _super);
+    function setDoorColor(car, door, color) {
+        var _this = _super.call(this) || this;
+        _this.priceCalculation = function () { return _this.decoratedCar.price + 1000; };
+        _this.description = function () { return "" + _this.decoratedCar.getDescription(); };
+        _this.decoratedCar = car,
+            _this.door = door;
         _this.color = color;
         return _this;
     }
-    return setColor;
-}(setDoorCount));
+    return setDoorColor;
+}(BMW));
 var setEngine = /** @class */ (function (_super) {
     __extends(setEngine, _super);
-    function setEngine(engine, color, doorCount) {
-        var _this = _super.call(this, color, doorCount) || this;
-        _this.setEngine = function (engineType) { return _this.engine = engineType; };
+    function setEngine(car, engine) {
+        var _this = _super.call(this) || this;
+        _this.priceCalculation = function () { return _this.decoratedCar.price + 8000; };
+        _this.description = function () { return "" + _this.decoratedCar.getDescription(); };
+        _this.decoratedCar = car;
         _this.engine = engine;
         return _this;
     }
     return setEngine;
-}(setColor));
-var setPower = /** @class */ (function (_super) {
-    __extends(setPower, _super);
-    function setPower(engine, power, color, doorCount) {
-        var _this = _super.call(this, engine, color, doorCount) || this;
-        _this.setPower = function (power) { return _this.power = power; };
-        _this.power = power;
-        return _this;
-    }
-    return setPower;
-}(setEngine));
-var priceCalculator = /** @class */ (function (_super) {
-    __extends(priceCalculator, _super);
-    function priceCalculator(engine, power, color, doorCount, price) {
-        var _this = _super.call(this, engine, power, color, doorCount) || this;
-        _this.price = price;
-        return _this;
-    }
-    priceCalculator.prototype.priceCalculation = function () {
-        if (this.doorCount === 4) {
-            this.price += 500;
-        }
-        else
-            this.price -= 500;
-        if (this.engine === 'oil') {
-            this.price += 1000;
-        }
-        else
-            this.price -= 1000;
-        if (this.color != 'white') {
-            this.price += 100;
-        }
-        return "BMW with color " + this.color + ", with " + this.doorCount + " doors, " + this.power + " power and  " + this.engine + " engine costs " + this.price + "$";
-    };
-    return priceCalculator;
-}(setPower));
-var Car = /** @class */ (function (_super) {
-    __extends(Car, _super);
-    function Car(engine, power, color, doorCount, price) {
-        return _super.call(this, engine, power, color, doorCount, price) || this;
-    }
-    return Car;
-}(priceCalculator));
-var car = new Car('oil', 3000, 'red', 4, 10000);
-console.log(car.priceCalculation());
-car.setDoorCount(2);
-car.setColor('blue');
-car.setEngine('hybrid');
-car.setPower(200);
-console.log(car.priceCalculation());
+}(BMW));
+var bmw = new BMW();
+console.log(bmw.getDescription());
+bmw = new setDoorColor(bmw, 5, 'blue');
+//bmw = new setEngine(bmw,'hybinjjrd');
+console.log(bmw.getDescription());
