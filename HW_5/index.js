@@ -14,31 +14,49 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Decorators = /** @class */ (function () {
-    function Decorators() {
-    }
-    return Decorators;
-}());
-var Car = /** @class */ (function (_super) {
-    __extends(Car, _super);
-    function Car() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.engine = 'oil';
-        _this.power = 3500;
-        _this.door = 4;
-        _this.color = 'white';
-        _this.price = 10200;
-        _this.setColor = function (color) { return _this.color = color; };
-        _this.setEngine = function (engineType) { return _this.engine = engineType; };
-        _this.setDoor = function (count) {
+var setDoorCount = /** @class */ (function () {
+    function setDoorCount(doorCount) {
+        var _this = this;
+        this.setDoor = function (count) {
             if (count === void 0) { count = 2 || 4; }
-            return _this.door = count;
+            return _this.doorCount = count;
         };
-        _this.setPower = function (power) { return _this.power = power; };
+        this.doorCount = doorCount;
+    }
+    return setDoorCount;
+}());
+var setColor = /** @class */ (function (_super) {
+    __extends(setColor, _super);
+    function setColor(color, doorCount) {
+        if (color === void 0) { color = 'white'; }
+        var _this = _super.call(this, doorCount) || this;
+        _this.setColor = function (color) { return _this.color = color; };
+        _this.color = color;
         return _this;
     }
-    Car.prototype.priceCalculation = function () {
-        if (this.door === 4) {
+    return setColor;
+}(setDoorCount));
+var setHybridOrOil = /** @class */ (function (_super) {
+    __extends(setHybridOrOil, _super);
+    function setHybridOrOil(engine, power, color, doorCount) {
+        var _this = _super.call(this, color, doorCount) || this;
+        _this.setEngine = function (engineType) { return _this.engine = engineType; };
+        _this.setPower = function (power) { return _this.power = power; };
+        _this.engine = engine;
+        _this.power = power;
+        return _this;
+    }
+    return setHybridOrOil;
+}(setColor));
+var priceCalculator = /** @class */ (function (_super) {
+    __extends(priceCalculator, _super);
+    function priceCalculator(engine, power, color, doorCount, price) {
+        var _this = _super.call(this, engine, power, color, doorCount) || this;
+        _this.price = price;
+        return _this;
+    }
+    priceCalculator.prototype.priceCalculation = function () {
+        if (this.doorCount === 4) {
             this.price += 500;
         }
         else
@@ -48,12 +66,19 @@ var Car = /** @class */ (function (_super) {
         }
         else
             this.price -= 1000;
-        if (typeof this.color != 'undefined') {
+        if (this.color != 'white') {
             this.price += 100;
         }
-        return "BMW with color " + this.color + ", with " + this.door + " doors, \n            " + this.power + " power and  " + this.engine + " engine costs " + this.price + "$";
+        return "BMW with color " + this.color + ", with " + this.doorCount + " doors, " + this.power + " power and  " + this.engine + " engine costs " + this.price + "$";
     };
+    return priceCalculator;
+}(setHybridOrOil));
+var Car = /** @class */ (function (_super) {
+    __extends(Car, _super);
+    function Car(engine, power, color, doorCount, price) {
+        return _super.call(this, engine, power, color, doorCount, price) || this;
+    }
     return Car;
-}(Decorators));
-var BMW = new Car();
-console.log(BMW.priceCalculation());
+}(priceCalculator));
+var car = new Car('oil', 3000, 'red', 4, 10000);
+console.log(car.priceCalculation());
