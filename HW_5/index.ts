@@ -3,7 +3,7 @@ class setDoorCount {
   constructor(doorCount:number){
       this.doorCount =doorCount;
   }
-  setDoor = (count: number = 2||4):number => this.doorCount = count;
+  setDoorCount = (count: number = 2||4):number => this.doorCount = count;
 }
 
 class setColor extends setDoorCount {
@@ -15,18 +15,23 @@ class setColor extends setDoorCount {
   setColor = (color:string):string => this.color = color;
 }
 
-class setHybridOrOil extends setColor {
+class setEngine extends setColor {
     engine: string;
-    power: number;
-    constructor(engine:string, power: number, color:string,  doorCount:number){
+    constructor(engine:string, color:string,  doorCount:number){
         super(color, doorCount);
         this.engine = engine;
-        this.power = power;
     }
     setEngine = (engineType: 'hybrid' | 'oil'): string => this.engine = engineType;                  
+}
+class setPower extends setEngine {
+    power: number;
+    constructor(engine:string, power: number, color:string,  doorCount:number){
+        super(engine, color, doorCount);
+        this.power = power;
+    }
     setPower = (power:number): number => this.power = power;
 }
-class priceCalculator extends setHybridOrOil {
+class priceCalculator extends setPower {
     price:number;
     constructor(engine:string, power: number, color:string,  doorCount:number, price:number){
         super(engine, power, color, doorCount);
@@ -48,8 +53,13 @@ class priceCalculator extends setHybridOrOil {
 
 class Car extends priceCalculator{ 
     constructor(engine:string, power: number, color:string,  doorCount:number, price:number){
-    super(engine, power,color, doorCount, price);
+    super(engine, power, color, doorCount, price);
     }
   }
   let car = new Car('oil',3000,'red',4, 10000);
+  console.log(car.priceCalculation());
+  car.setDoorCount(2)
+  car.setColor('blue')
+  car.setEngine('hybrid')
+  car.setPower(200)
   console.log(car.priceCalculation());

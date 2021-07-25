@@ -17,7 +17,7 @@ var __extends = (this && this.__extends) || (function () {
 var setDoorCount = /** @class */ (function () {
     function setDoorCount(doorCount) {
         var _this = this;
-        this.setDoor = function (count) {
+        this.setDoorCount = function (count) {
             if (count === void 0) { count = 2 || 4; }
             return _this.doorCount = count;
         };
@@ -36,18 +36,26 @@ var setColor = /** @class */ (function (_super) {
     }
     return setColor;
 }(setDoorCount));
-var setHybridOrOil = /** @class */ (function (_super) {
-    __extends(setHybridOrOil, _super);
-    function setHybridOrOil(engine, power, color, doorCount) {
+var setEngine = /** @class */ (function (_super) {
+    __extends(setEngine, _super);
+    function setEngine(engine, color, doorCount) {
         var _this = _super.call(this, color, doorCount) || this;
         _this.setEngine = function (engineType) { return _this.engine = engineType; };
-        _this.setPower = function (power) { return _this.power = power; };
         _this.engine = engine;
+        return _this;
+    }
+    return setEngine;
+}(setColor));
+var setPower = /** @class */ (function (_super) {
+    __extends(setPower, _super);
+    function setPower(engine, power, color, doorCount) {
+        var _this = _super.call(this, engine, color, doorCount) || this;
+        _this.setPower = function (power) { return _this.power = power; };
         _this.power = power;
         return _this;
     }
-    return setHybridOrOil;
-}(setColor));
+    return setPower;
+}(setEngine));
 var priceCalculator = /** @class */ (function (_super) {
     __extends(priceCalculator, _super);
     function priceCalculator(engine, power, color, doorCount, price) {
@@ -72,7 +80,7 @@ var priceCalculator = /** @class */ (function (_super) {
         return "BMW with color " + this.color + ", with " + this.doorCount + " doors, " + this.power + " power and  " + this.engine + " engine costs " + this.price + "$";
     };
     return priceCalculator;
-}(setHybridOrOil));
+}(setPower));
 var Car = /** @class */ (function (_super) {
     __extends(Car, _super);
     function Car(engine, power, color, doorCount, price) {
@@ -81,4 +89,9 @@ var Car = /** @class */ (function (_super) {
     return Car;
 }(priceCalculator));
 var car = new Car('oil', 3000, 'red', 4, 10000);
+console.log(car.priceCalculation());
+car.setDoorCount(2);
+car.setColor('blue');
+car.setEngine('hybrid');
+car.setPower(200);
 console.log(car.priceCalculation());
