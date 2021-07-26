@@ -17,22 +17,15 @@ var __extends = (this && this.__extends) || (function () {
 var Car = /** @class */ (function () {
     function Car() {
         var _this = this;
-        this.priceCalculation = function () {
-            if (_this.door === 4) {
-                _this.price += 500;
-            }
-            else
-                _this.price -= 500;
-            if (_this.engine === 'oil') {
+        this.getDescription = function () {
+            if (typeof _this.color !== undefined || typeof _this.door !== undefined)
+                _this.price += 2000;
+            if (_this.engine == 'oil')
+                _this.price += 3000;
+            else if (_this.engine == 'hybrid')
                 _this.price += 1000;
-            }
-            else
-                _this.price -= 1000;
-            if (_this.color != 'white') {
-                _this.price += 100;
-            }
+            return "Engine:" + _this.engine + ", Power:" + _this.power + ", Color:" + _this.color + ",\n          " + _this.door + " doors costs " + _this.price;
         };
-        this.getDescription = function () { return "Engine:" + _this.engine + ", Power:" + _this.power + ", Color:" + _this.color + ", " + _this.door + " doors costs " + _this.price + "}"; };
     }
     return Car;
 }());
@@ -49,25 +42,27 @@ var BMW = /** @class */ (function (_super) {
     }
     return BMW;
 }(Car));
-var setDoorColor = /** @class */ (function (_super) {
-    __extends(setDoorColor, _super);
-    function setDoorColor(car, door, color) {
+var setDoorAndColor = /** @class */ (function (_super) {
+    __extends(setDoorAndColor, _super);
+    function setDoorAndColor(car, door, color) {
         var _this = _super.call(this) || this;
-        _this.priceCalculation = function () { return _this.decoratedCar.price + 1000; };
-        _this.description = function () { return "" + _this.decoratedCar.getDescription(); };
-        _this.decoratedCar = car,
-            _this.door = door;
+        _this.description = function () {
+            "" + _this.decoratedCar.getDescription();
+        };
+        _this.decoratedCar = car;
+        _this.door = door;
         _this.color = color;
         return _this;
     }
-    return setDoorColor;
+    return setDoorAndColor;
 }(BMW));
 var setEngine = /** @class */ (function (_super) {
     __extends(setEngine, _super);
     function setEngine(car, engine) {
         var _this = _super.call(this) || this;
-        _this.priceCalculation = function () { return _this.decoratedCar.price + 8000; };
-        _this.description = function () { return "" + _this.decoratedCar.getDescription(); };
+        _this.description = function () {
+            "" + _this.decoratedCar.getDescription();
+        };
         _this.decoratedCar = car;
         _this.engine = engine;
         return _this;
@@ -76,6 +71,7 @@ var setEngine = /** @class */ (function (_super) {
 }(BMW));
 var bmw = new BMW();
 console.log(bmw.getDescription());
-bmw = new setDoorColor(bmw, 5, 'blue');
-//bmw = new setEngine(bmw,'hybinjjrd');
+bmw = new setDoorAndColor(bmw, 2, 'blue');
+console.log(bmw.getDescription());
+bmw = new setEngine(bmw, 'hybrid');
 console.log(bmw.getDescription());
