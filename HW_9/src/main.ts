@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function main() {
+  
   let transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
@@ -30,6 +31,7 @@ async function main() {
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
-setInterval( main, 50000 );
+
+export default main
 
 
