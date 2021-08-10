@@ -30,6 +30,6 @@ async function main() {
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
-setInterval( main, 50000 )
+setInterval( main, 50000 );
 
 
