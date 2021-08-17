@@ -1,0 +1,5 @@
+name:"img",
+comments: true, 
+id:"7ad2a1d8-b02f-4c76-8c03-6cbe90e5d93f"
+
+//run node DataToJson/filereader.ts
