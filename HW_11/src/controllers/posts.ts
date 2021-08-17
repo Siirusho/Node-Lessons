@@ -21,7 +21,7 @@ export const createPost = (req:Request, res:Response):void => {
 };
 
 export const getPost = (req:Request, res:Response):void => {
-    res.send(posts.filter((post) => post.id == req.params.id))
+    res.send(posts.filter((post) => post.id == req.params.id));
 };
 
 export const deletePost = (req:Request, res:Response):void => {     
@@ -29,11 +29,11 @@ export const deletePost = (req:Request, res:Response):void => {
     res.send(`Post with id ${req.params.id} has been deleted`);
 };
 
-export const updatePost =  (req:Request, res:Response):void => {
-    const post = posts.find((post) => post.id == req.params.id)
+export const updatePost = (req:Request, res:Response):void => {
+    const post = posts.find((post) => post.id == req.params.id);
     if(typeof req.body.name !== 'undefined' ) post.name = req.body.name;
     if(typeof req.body.creationDate !== 'undefined' )  post.creationDate = req.body.creationDate;
     if(typeof req.body.comments !== 'undefined' ) post.comments = req.body.comments;
     
-    res.send(`Post with name <${post.name}> has been updated`)
+    res.send(`Post with name <${post.name}> has been updated`);
 };

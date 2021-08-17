@@ -4,6 +4,6 @@ import {fileReader} from '../controllers/fileReader'
 
 const fileRouter:Router = express.Router();
 
-fileRouter.get('/', fileReader)
+fileRouter.get('/', fileReader);
 
-export default fileRouter
+export default fileRouter;
