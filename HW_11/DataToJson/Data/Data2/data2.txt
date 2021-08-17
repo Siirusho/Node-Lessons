@@ -1,0 +1,1 @@
+"{ \r\n  \"name\": \"HW_10\",\r\n  \"version\": \"1.0.0\",\r\n  \"description\": \"\",\r\n  \"main\": \"index.js\"\r\n}\r\n"
