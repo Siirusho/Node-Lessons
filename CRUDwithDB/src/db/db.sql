@@ -3,5 +3,4 @@ CREATE TABLE users (
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50),
     email VARCHAR(150),
-    CONSTRAINT uniqueEmail UNIQUE (Email)
 );

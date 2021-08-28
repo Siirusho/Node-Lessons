@@ -7,4 +7,4 @@ const pool = new Pool({
     database: "CRUD"
 })
 
-module.exports = pool
+module.exports = pool;
